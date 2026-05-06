@@ -1,0 +1,26 @@
+Category,Object,Sign,Degree,Minutes,Seconds,Retrograde,Absolute_Degrees_360
+Planet,Sun,Scorpio,28,44,44,No,238.7455
+Planet,Moon,Gemini,12,02,34,No,72.0428
+Planet,Mercury,Sagittarius,2,47,08,No,242.7855
+Planet,Venus,Scorpio,0,03,12,Yes,210.0533
+Planet,Mars,Libra,23,21,21,No,203.3558
+Planet,Jupiter,Leo,17,49,04,No,137.8178
+Planet,Saturn,Gemini,27,38,18,Yes,87.6383
+Planet,Uranus,Aquarius,25,01,54,No,325.0317
+Planet,Neptune,Aquarius,8,28,37,No,308.4769
+Planet,Pluto,Sagittarius,16,44,45,No,256.7458
+Node,North Node,Gemini,9,11,11,Yes,69.1864
+House,House 1 (Ascendant),Pisces,16,43,56,No,346.7322
+House,House 2,Aries,22,23,34,No,22.3928
+House,House 3,Taurus,23,15,01,No,53.2503
+House,House 4 (IC),Gemini,20,02,46,No,80.0461
+House,House 5,Cancer,15,45,11,No,105.7531
+House,House 6,Leo,13,41,31,No,133.6919
+House,House 7 (Descendant),Virgo,16,43,56,No,166.7322
+House,House 8,Libra,22,23,34,No,202.3928
+House,House 9,Scorpio,23,15,01,No,233.2503
+House,House 10 (Midheaven),Sagittarius,20,02,46,No,260.0461
+House,House 11,Capricorn,15,45,11,No,285.7531
+House,House 12,Aquarius,13,41,31,No,313.6919
+Moon,Tethys (Geocentric),Gemini,27,39,00,Yes,87.6500
+Moon,Tethys (Planetcentric),Libra,23,55,50,Yes,203.9306
