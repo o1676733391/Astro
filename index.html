@@ -50,11 +50,29 @@
                             transform: translate(-50%, -40%);
                         }
                     }
+                    
+                    #close-btn {
+                        background: black;
+                        color: white;
+                        border: 1px solid white;
+                        padding: 8px 16px;
+                        font-size: 14px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        border-radius: 4px;
+                        margin-top: 15px;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    #close-btn:hover {
+                        background: white;
+                        color: black;
+                    }
                 `;
                 document.head.appendChild(style);
             }
             
-            // Create popup element
+            // Create popup frame
             const popup = document.createElement('div');
             popup.id = 'viewing-notification';
             popup.style.cssText = `
@@ -62,32 +80,57 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: black;
                 color: white;
-                padding: 30px 40px;
-                border-radius: 15px;
+                border: 2px solid white;
+                padding: 40px 50px;
+                border-radius: 8px;
                 font-size: 24px;
                 font-weight: bold;
                 text-align: center;
                 z-index: 10000;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
                 animation: slideIn 0.5s ease-out;
                 font-family: 'Arial', sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             `;
-            popup.textContent = 'Caught it, you digging me! :>';
             
-            document.body.appendChild(popup);
-            console.log('Notification displayed!');
+            // Create message text
+            const message = document.createElement('div');
+            message.textContent = 'Caught it, you digging me ✨';
+            popup.appendChild(message);
             
-            // Auto-remove popup after 5 seconds
-            setTimeout(function() {
+            // Create close button
+            const closeBtn = document.createElement('button');
+            closeBtn.id = 'close-btn';
+            closeBtn.textContent = 'Close';
+            closeBtn.onclick = function() {
                 popup.style.animation = 'fadeOut 0.5s ease-in forwards';
                 setTimeout(function() {
                     if (popup.parentNode) {
                         popup.remove();
                     }
                 }, 500);
-            }, 5000);
+            };
+            popup.appendChild(closeBtn);
+            
+            document.body.appendChild(popup);
+            console.log('Notification displayed!');
+            
+            // Auto-remove popup after 10 seconds
+            setTimeout(function() {
+                if (popup.parentNode) {
+                    popup.style.animation = 'fadeOut 0.5s ease-in forwards';
+                    setTimeout(function() {
+                        if (popup.parentNode) {
+                            popup.remove();
+                        }
+                    }, 500);
+                }
+            }, 10000);
         }
     })();
     </script>
