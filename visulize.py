@@ -338,6 +338,94 @@ def main():
     # Export the entire interactive chart to a standalone HTML file. 
     # Using 'cdn' keeps the file size small by loading the rendering engine from the cloud.
     fig.write_html(html_output, include_plotlyjs="cdn", full_html=True)
+    
+    # Inject notification script for 3-minute viewing
+    with open(html_output, 'r', encoding='utf-8') as f:
+        html_content = f.read()
+    
+    # Add custom JavaScript for 3-minute notification
+    notification_script = """
+    <script>
+    // Initialize 3-minute viewing notification
+    (function() {
+        const NOTIFICATION_DELAY = 3 * 60 * 1000; // 3 minutes in milliseconds
+        let notificationShown = false;
+        
+        // Show notification after 3 minutes
+        setTimeout(function() {
+            if (!notificationShown) {
+                notificationShown = true;
+                
+                // Create custom popup
+                const popup = document.createElement('div');
+                popup.id = 'viewing-notification';
+                popup.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 30px 40px;
+                    border-radius: 15px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    text-align: center;
+                    z-index: 10000;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                    animation: slideIn 0.5s ease-out;
+                    font-family: 'Arial', sans-serif;
+                `;
+                popup.textContent = 'Caught it, you digging me! :>';
+                
+                document.body.appendChild(popup);
+                
+                // Add animation to body
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideIn {
+                        from {
+                            opacity: 0;
+                            transform: translate(-50%, -60%);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                    
+                    @keyframes fadeOut {
+                        from {
+                            opacity: 1;
+                            transform: translate(-50%, -50%);
+                        }
+                        to {
+                            opacity: 0;
+                            transform: translate(-50%, -40%);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Auto-remove popup after 5 seconds
+                setTimeout(function() {
+                    popup.style.animation = 'fadeOut 0.5s ease-in forwards';
+                    setTimeout(function() {
+                        popup.remove();
+                    }, 500);
+                }, 5000);
+            }
+        }, NOTIFICATION_DELAY);
+    })();
+    </script>
+    """
+    
+    # Insert the script before closing body tag
+    html_content = html_content.replace('</body>', notification_script + '\n</body>')
+    
+    with open(html_output, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
     print("Build complete! Drag this project folder into Vercel to deploy.")
 
     # Also open locally for immediate verification
